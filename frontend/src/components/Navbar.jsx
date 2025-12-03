@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Login from "./Login";
+import Logout from "./Logout";
+import { useAuth } from "../context/AuthProvider";
 
 function Navbar() {
+	const [authUser, setAuthUser] = useAuth();
+
+
 	const [showLogin, setShowLogin] = useState(false);
 
 	// Ensure any leftover dark-mode classes/styles are removed (cleanup)
@@ -40,8 +45,8 @@ function Navbar() {
 		<>
 			<li><a className="text-black" href="/">Home</a></li>
 			<li><a className="text-black" href="/courses">Courses</a></li>
-			<li><a className="text-black">Contact</a></li>
-			<li><a className="text-black">About</a></li>
+			<li><a className="text-black" href="/contact">Contact</a></li>
+			<li><a className="text-black" href="/about">About</a></li>
 		</>
 	);
 
@@ -135,16 +140,30 @@ function Navbar() {
 								</label>
 							</div>
 
-							{/* LOGIN BUTTON */}
-							<button
-								type="button"
-								onClick={openLogin}
-								className="btn w-20 bg-orange-500 text-white hover:bg-orange-600 transition"
-								aria-haspopup="dialog"
-							>
-								Login
-							</button>
-							{showLogin && <Login isOpen={showLogin} onClose={() => setShowLogin(false)} />}
+							{
+								authUser ? (
+									<Logout />
+								) : (
+									<>
+										<button
+											type="button"
+											onClick={openLogin}
+											className="btn w-20 bg-orange-500 text-white hover:bg-orange-600 transition"
+											aria-haspopup="dialog"
+										>
+											Login
+										</button>
+
+										{showLogin && (
+											<Login
+												isOpen={showLogin}
+												onClose={() => setShowLogin(false)}
+											/>
+										)}
+									</>
+								)
+							}
+
 						</div>
 					</div>
 				</div>

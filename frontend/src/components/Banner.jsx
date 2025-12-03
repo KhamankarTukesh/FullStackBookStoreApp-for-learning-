@@ -32,7 +32,7 @@ function Banner() {
                         </svg>
                         <input type="email" placeholder="Enter the email" required className='flex-1 outline-none'/>
                     </label>
-                    <button className="btn btn-secondary mt-6 bg-pink-400 p-2">Secondary</button>
+                    <button className="btn btn-secondary mt-6 bg-pink-400 p-2">Get Started</button>
                 </div>
             </div>
         </div>
